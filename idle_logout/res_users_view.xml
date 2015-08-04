@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    <record id="view_users_idle_logout_form" model="ir.ui.view">
+            <field name="name">res.users.idle.logout.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+	         	<xpath expr="//field[@name='company_id']" position="after">
+	         		<separator string="Logout Timer" colspan="2"/>
+	         		   <field name="idle_timer"/>
+	             </xpath>
+            </field>
+         </record>
+    </data>
+</openerp>

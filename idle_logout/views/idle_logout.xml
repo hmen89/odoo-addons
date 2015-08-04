@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim:fdn=3:
+-->
+<openerp>
+    <data>
+        <template id="assets_backend" name="idle_logout assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/idle_logout/static/lib/idle_timer/jquery.idle_timer.js"></script>
+                <script type="text/javascript" src="/idle_logout/static/src/js/idle_logout.js"></script>
+            </xpath>
+        </template>
+    </data>
+</openerp>
