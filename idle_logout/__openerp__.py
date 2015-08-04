@@ -22,7 +22,7 @@
 {
     'name': 'Idle Logout',
     'version': '1.0',
-    'category': 'Custom',
+    'category': 'Tools',
     'price': 10.00,
     'currency': 'EUR',
     'summary': 'Automatic Logout after inactivity',
