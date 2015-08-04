@@ -23,6 +23,8 @@
     'name': 'Idle Logout',
     'version': '1.0',
     'category': 'Custom',
+    'price': 10.00,
+    'currency': 'EUR',
     'summary': 'Idle Logout',
     'description': """
 Idle Logout    """,
