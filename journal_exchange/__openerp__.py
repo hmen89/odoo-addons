@@ -20,10 +20,10 @@
 #
 ##############################################################################
 {
-    'name': 'Journal Exchange',
+    'name': 'Journal Currency Exchange',
     'version': '1.0',
     'category': 'Accounting',
-    'summary': 'Journal Exchange',
+    'summary': 'Journal Currency Exchange',
     'price': 30.00,
     'currency': 'EUR',
     'description': """
