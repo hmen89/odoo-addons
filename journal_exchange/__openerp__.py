@@ -22,7 +22,7 @@
 {
     'name': 'Journal Exchange',
     'version': '1.0',
-    'category': 'Custom',
+    'category': 'Accounting',
     'summary': 'Journal Exchange',
     'price': 30.00,
     'currency': 'EUR',
