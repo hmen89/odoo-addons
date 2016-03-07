@@ -1,0 +1,102 @@
+<openerp>
+    <data>
+        <record id="view_journal_exchange_filter" model="ir.ui.view">
+            <field name="name">journal.exchange.filter</field>
+            <field name="model">journal.exchange</field>
+            <field name="arch" type="xml">
+                <search string="Journal Exchange">
+                    <field name="name"/>
+                    <field name="journal_id"/>
+                    <field name="journal_dest_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_journal_exchange_tree">
+            <field name="name">Journal Exchange</field>
+            <field name="model">journal.exchange</field>
+            <field name="arch" type="xml">
+                <tree string="Journal Exchange">
+                    <field name="name"/>
+                    <field name="journal_id"/>
+                    <field name="journal_dest_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_journal_exchange_form">
+            <field name="name">Journal Exchange</field>
+            <field name="model">journal.exchange</field>
+            <field name="arch" type="xml">
+                <form string="Journal Exchange">
+                    <header>
+                        <button name="confirm" states="draft" string="Confirm Exchange" id="draft_confirm" type="object" class="oe_highlight"/>
+                        <button name="cancel" states="in_transit" string="Cancel Exchange" id="transit_cancel" type="object"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,in_transit,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title oe_left">
+                            <label for="name" string="Exchange No " attrs="{'invisible': [('state','=','draft')]}"/>
+                            <h1>
+                                <field name="name" placeholder="Name..." readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <separator string="Source Currency"/>
+                            <group>
+                                <field name="journal_id" required="1" attrs="{'readonly': [('state','!=','draft')]}" domain="[('type','in', ('cash', 'bank'))]" on_change="onchange_journal_id(journal_id, journal_dest_id, initial_amount)"/>
+                                <field name="initial_amount" required="1" attrs="{'readonly': [('state','!=','draft')]}" widget="monetary" options="{'currency_field': 'initial_currency'}" on_change="onchange_journal_id(journal_id, journal_dest_id, initial_amount)"/>
+                                <field name="initial_currency" required="1" invisible="1"/>
+                                <field name="current_rate" widget="monetary" options="{'currency_field': 'exchange_currency'}" readonly="1"/>
+                                <field name="current_amount" widget="monetary" options="{'currency_field': 'exchange_currency'}" readonly="1"/>
+                            </group>
+
+                        </group>
+                        <group>
+                            <separator string="Destination Currency"/>
+                            <group>
+                                <field name="journal_dest_id" required="1" attrs="{'readonly': [('state','!=','draft')]}" domain="[('type','in', ('cash', 'bank'))]" on_change="onchange_journal_dest_id(journal_id, journal_dest_id, initial_amount)"/>
+                                <field name="exchange_date" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="exchanged_rate" attrs="{'readonly': [('state','!=','draft')]}" widget="monetary" options="{'currency_field': 'exchange_currency'}" on_change="onchange_rate_exchanged(exchanged_rate,exchanged_amount,initial_amount)"/>
+                                <field name="exchanged_amount" widget="monetary" options="{'currency_field': 'exchange_currency'}" attrs="{'readonly': [('state','!=','draft')]}" on_change="onchange_amount_exchanged(exchanged_rate,exchanged_amount,initial_amount)"/>
+                                <field name="exchange_currency" invisible="1"/>
+                            </group>
+                        </group>
+                        <!--<notebook>
+                            <page>
+                                <field name="move_lines" readonly="1">
+                                    <tree>
+                                        <field name="date"/>
+                                        <field name="name"/>
+                                        <field name="account_id"/>
+                                        <field name="move_id"/>
+                                        <field name="debit"/>
+                                        <field name="credit"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_journal_exchange" model="ir.actions.act_window">
+            <field name="name">Journal Exchange</field>
+            <field name="res_model">journal.exchange</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_journal_exchange_filter"/>
+        </record>
+
+
+
+        <menuitem
+            action="action_journal_exchange"
+            id="menu_journal_exchange"
+            groups="account.group_account_invoice"
+            parent="account.menu_finance_bank_and_cash" sequence="10"/>
+    </data>
+</openerp>

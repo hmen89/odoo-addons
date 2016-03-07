@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<openerp>
+<data noupdate="1">
+
+    #
+    # Sequences for journal.exchange
+    #
+
+    <record model="ir.sequence.type" id="seq_type_journal_exchanger">
+        <field name="name">Journal Exchange</field>
+        <field name="code">journal.exchange</field>
+    </record>
+
+    <record model="ir.sequence" id="seq_journal_exchange">
+        <field name="name">Journal Exchange Sequence</field>
+        <field name="code">journal.exchange</field>
+        <field name="prefix">EX-</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False" />
+    </record>
+
+</data>
+</openerp>
