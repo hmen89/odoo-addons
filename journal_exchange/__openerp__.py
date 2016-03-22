@@ -24,7 +24,7 @@
     'version': '1.0',
     'category': 'Accounting',
     'summary': 'Journal Currency Exchange',
-    'price': 30.00,
+    'price': 15.00,
     'currency': 'EUR',
     'description': """
 Journal Exchange
