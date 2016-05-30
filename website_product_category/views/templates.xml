@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<!-- Layout and common templates -->
+
+<template id="products_child_categories" inherit_id="website_sale.products" active="True" customize_show="True" name="Product Child Categories">
+  <xpath expr="//div[@id='products_grid']/table" position="before">
+<table width="100%">
+                <tbody>
+                    <tr>
+                        <td>
+                            <t t-foreach="child_categories" t-as="child_categ">
+                                <t t-set="subcategory" t-value="child_categ"/>
+                                <t t-call="website_product_category.subcategory_item"/>
+                    <!--<t t-foreach="tr_product" t-as="td_product">
+                      <t t-if="td_product">
+                      <t t-set="product" t-value="td_product['product']"/>
+                      <td t-att-colspan="td_product['x'] != 1 and td_product['x']"
+                          t-att-rowspan="td_product['y'] != 1 and td_product['y']"
+                          t-attf-class="oe_product oe_grid oe-height-#{td_product['y']*2} #{ td_product['class'] }">
+
+                          <div class="oe_product_cart" t-att-data-publish="product.website_published and 'on' or 'off'">
+                            <t t-set="product_image_big" t-value="td_product['x']+td_product['y'] > 2"/>
+                            <t t-call="website_sale.products_item"/>
+                          </div>
+
+                      </td>
+                      </t>
+                    </t>-->
+                  </t>
+                        </td>
+                    </tr>
+                </tbody>
+              </table>
+  </xpath>
+</template>
+
+    <template id="subcategory_item" name="SubCategory item">
+        <div itemscope="itemscope" itemtype="http://schema.org/SubCategory">
+            <div class="oe_product_image">
+                <a itemprop="url">
+                    <span itemprop="image" t-field="subcategory.image" t-field-options='{"widget": "image" #{None if product_image_big else ", \"resize\": \"300x300\""}}' t-att-alt="subcategory.name"/>
+                </a>
+            </div>
+            <section>
+                <h5><strong><a itemprop="name" t-field="subcategory.name"/></strong></h5>
+            </section>
+        </div>
+    </template>
+
+    </data>
+</openerp>
