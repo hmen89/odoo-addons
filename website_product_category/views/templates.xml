@@ -2,6 +2,12 @@
 <openerp>
 <data>
 
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="Shop SubCategories">
+  <xpath expr="." position="inside">
+      <link rel='stylesheet' href='/website_product_category/static/src/css/website_product_category.css'/>
+  </xpath>
+</template>
+
 <!-- Layout and common templates -->
 
 <template id="products_child_categories" inherit_id="website_sale.products" active="True" customize_show="True" name="Product Child Categories">
@@ -38,14 +44,18 @@
 
     <template id="subcategory_item" name="SubCategory item">
         <div itemscope="itemscope" itemtype="http://schema.org/SubCategory">
-            <div class="oe_product_image">
-                <a itemprop="url">
-                    <span itemprop="image" t-field="subcategory.image" t-field-options='{"widget": "image" #{None if product_image_big else ", \"resize\": \"300x300\""}}' t-att-alt="subcategory.name"/>
-                </a>
+            <span>
+            <div class="oe_subcategory">
+                <div class="oe_subcategory_image">
+                    <a itemprop="url" t-att-href="keep('/shop/category/' + slug(subcategory), category=0)">
+                        <span itemprop="image" t-field="subcategory.image" t-field-options='{"widget": "image" #{None if product_image_big else ", \"resize\": \"300x300\""}}' t-att-alt="subcategory.name"/>
+                    </a>
+                </div>
+                <section>
+                    <h5><strong><a itemprop="name" t-att-href="keep('/shop/category/' + slug(subcategory), category=0)" t-field="subcategory.name"/></strong></h5>
+                </section>
             </div>
-            <section>
-                <h5><strong><a itemprop="name" t-field="subcategory.name"/></strong></h5>
-            </section>
+            </span>
         </div>
     </template>
 
