@@ -12,7 +12,6 @@
     margin: 0px !important;
     width: 211px;
     height: 189px;
-    background: darkgrey;
     border: 1px solid grey;
     border-radius: 3px;
     border-bottom-width: 3px;
@@ -21,9 +20,7 @@
 }
 
 .subcategories-division .oe_subcategory .oe_subcategory_img {
-    position: relative;
-    width: 210px;
-    height: 170px;
+    position: absolute;
     text-align: center;
     left: 15px;
     right: 15px;
