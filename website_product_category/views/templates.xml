@@ -15,26 +15,13 @@
 <table width="100%">
                 <tbody>
                     <tr>
-                        <td>
-                            <t t-foreach="child_categories" t-as="child_categ">
-                                <t t-set="subcategory" t-value="child_categ"/>
-                                <t t-call="website_product_category.subcategory_item"/>
-                    <!--<t t-foreach="tr_product" t-as="td_product">
-                      <t t-if="td_product">
-                      <t t-set="product" t-value="td_product['product']"/>
-                      <td t-att-colspan="td_product['x'] != 1 and td_product['x']"
-                          t-att-rowspan="td_product['y'] != 1 and td_product['y']"
-                          t-attf-class="oe_product oe_grid oe-height-#{td_product['y']*2} #{ td_product['class'] }">
-
-                          <div class="oe_product_cart" t-att-data-publish="product.website_published and 'on' or 'off'">
-                            <t t-set="product_image_big" t-value="td_product['x']+td_product['y'] > 2"/>
-                            <t t-call="website_sale.products_item"/>
-                          </div>
-
-                      </td>
-                      </t>
-                    </t>-->
-                  </t>
+                        <td width="100%">
+                            <div class="subcategories-division">
+                                <t t-foreach="child_categories" t-as="child_categ">
+                                    <t t-set="subcategory" t-value="child_categ"/>
+                                    <t t-call="website_product_category.subcategory_item"/>
+                                </t>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -43,20 +30,24 @@
 </template>
 
     <template id="subcategory_item" name="SubCategory item">
-        <div itemscope="itemscope" itemtype="http://schema.org/SubCategory">
-            <span>
-            <div class="oe_subcategory">
-                <div class="oe_subcategory_image">
+        <span itemscope="itemscope" itemtype="http://schema.org/SubCategory">
+            <span class="oe_subcategory">
+                <div class="oe_subcategory_img">
                     <a itemprop="url" t-att-href="keep('/shop/category/' + slug(subcategory), category=0)">
                         <span itemprop="image" t-field="subcategory.image" t-field-options='{"widget": "image" #{None if product_image_big else ", \"resize\": \"300x300\""}}' t-att-alt="subcategory.name"/>
                     </a>
                 </div>
-                <section>
+                <div class="oe_subcategory_name">
                     <h5><strong><a itemprop="name" t-att-href="keep('/shop/category/' + slug(subcategory), category=0)" t-field="subcategory.name"/></strong></h5>
-                </section>
-            </div>
+                </div>
             </span>
-        </div>
+        </span>
+    </template>
+
+
+    <template id="products" name="Products" inherit_id="website_sale.products">
+        <xpath expr="//div[@class='text-center text-muted']" position="replace">
+      </xpath>
     </template>
 
     </data>
