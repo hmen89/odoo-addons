@@ -51,17 +51,6 @@ class website_product_category(website_sale):
 
         child_categ_ids = []
 
-        if ppg:
-            try:
-                ppg = int(ppg)
-            except ValueError:
-                ppg = PPG
-            post["ppg"] = ppg
-        else:
-            ppg = PPG
-
-        url = "/shop"
-
         if category:
 
             category = pool['product.public.category'].browse(cr, uid, int(category), context=context)
