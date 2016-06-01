@@ -31,6 +31,20 @@
     bottom: 55px;
 }
 
+
+.subcategories-division .oe_subcategory .oe_subcategory_img img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 4;
+}
+
+
 .subcategories-division .oe_subcategory .oe_subcategory_name {
     position: absolute;
     -webkit-box-sizing: border-box;
