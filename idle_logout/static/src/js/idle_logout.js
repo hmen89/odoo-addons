@@ -43,7 +43,7 @@ openerp.idle_logout = function(instance) {
     });
 
 
-    instance.web.form.FieldTextHtml = instance.web.form.FieldTextHtml.extend({
+    /*instance.web.form.FieldTextHtml = instance.web.form.FieldTextHtml.extend({
         initialize_content: function(){
             console.log('initialize');
             this._super.apply(this, arguments);
@@ -53,22 +53,7 @@ openerp.idle_logout = function(instance) {
             if (! this.get("effective_readonly")) {
                 //Define default
 
-                /*var cleditor_body = this.$cleditor.doc.body;
-                $(cleditor_body).idleTimer = function (firstParam) {
-                    if (this[0]) {
-                        return $.idleTimer(firstParam, this[0]);
-                    }
 
-                    return this;
-                };
-                $(cleditor_body).idleTimer({ timeout: docTimeout });
-                $(cleditor_body).on("idle.idleTimer", function (event, elem, obj) {
-                    odoo_document.trigger('idle.idleTimer');
-                });
-                $(cleditor_body).on("active.idleTimer", function (event, elem, obj, e) {
-                    odoo_document.trigger('active.idleTimer');
-                });
-;*/
                 self,cleditor_doctimeout = null;
                 var cleditor_doc = this.$cleditor.doc;
 
@@ -90,10 +75,10 @@ openerp.idle_logout = function(instance) {
             self,cleditor_doctimeout = null;
             this._super.apply(this, arguments);
         }
-    });
+    });*/
 
 
-   
+
 };
 
 

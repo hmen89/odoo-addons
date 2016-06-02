@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Odoo Module
-#    Copyright (C) 2015 Grover Menacho (<http://www.grovermenacho.com>).
-#    Autor: Grover Menacho
+#    Poiesis Consulting, OpenERP Partner
+#    Copyright (C) 2013 Poiesis Consulting (<http://www.poiesisconsulting.com>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,23 +18,4 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    'name': 'Idle Logout',
-    'version': '1.0',
-    'category': 'Tools',
-    'price': 10.00,
-    'currency': 'EUR',
-    'summary': 'Automatic Logout after inactivity',
-    'description': """
-Idle Logout    """,
-    'author': 'Grover Menacho',
-    'website': 'http://www.grovermenacho.com',
-    'depends': ['web','base'],
-    'data': ['res_users_view.xml',
-             'views/idle_logout.xml'],
-    'images': ['images/logout_user.jpg','images/login_screen.jpg'],
-    'qweb': [],
-    'installable': True,
-    'active': False,
-    'application': True,
-}
+
