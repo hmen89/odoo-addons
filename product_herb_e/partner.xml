@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+
+    <record id="view_partner_form_recommendation" model="ir.ui.view">
+      <field name="name">res.partner.form.recommendation</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="model">res.partner</field>
+      <field name="arch" type="xml">
+        <field name="website" position="after">
+
+          <field name="dob"/>
+
+          <field name="reco_patient_id"/>
+          <field name="reco_issued"/>
+          <field name="reco_expired"/>
+          <field name="reco_issuer"/>
+          <field name="reco_license"/>
+          <field name="reco_verification_URL" widget="url"/>
+          <field name="reco_verified"/>
+
+        </field>
+      </field>
+    </record>
+
+
+  </data>
+</openerp>

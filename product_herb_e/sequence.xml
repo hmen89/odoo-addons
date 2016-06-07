@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<openerp>
+  <data noupdate="1">
+
+    <record id="seq_prod_barcode" model="ir.sequence">
+      <field name="name">Product Barcode</field>
+      <field name="code">product.barcode</field>
+      <field name="prefix">HE-</field>
+      <field name="padding">5</field>
+    </record>
+
+  </data>
+</openerp>
