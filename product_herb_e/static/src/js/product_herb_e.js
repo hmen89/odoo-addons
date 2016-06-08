@@ -8,18 +8,7 @@ var core = require('web.core');
 var utils = require('web.utils');
 var round_pr = utils.round_precision;
 
-
-models.load_models(
-    {
-        model:  'pos.category',
-        fields: ['id','name','parent_id','child_id','image'],
-        domain: null,
-        context: function(self){ return { pos_ui: true }; },
-        loaded: function(self, categories){
-            self.db.add_categories(categories);
-        },
-    },
-    {
+models.load_models({
         model:  'product.product',
         fields: ['display_name', 'list_price','price','pos_categ_id', 'taxes_id', 'barcode', 'default_code',
                  'to_weight', 'uom_id', 'description_sale', 'description', 'sort_code',
