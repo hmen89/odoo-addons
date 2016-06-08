@@ -50,5 +50,18 @@
       </xpath>
     </template>
 
+
+    <template id="option_collapse_categories_recursive" name="Collapse Category Recursive">
+      <li t-att-class="'active' if categ.id == int(category or 0) else ''" ref="recursive">
+          <i t-if="categ.child_id" t-attf-class="text-primary fa #{'fa-chevron-down' if categ.id in parent_category_ids else 'fa-chevron-right'}"/>
+          <a t-att-href="keep('/shop/category/' + slug(categ), category=0)" t-field="categ.name"></a>
+          <ul t-if="categ.child_id" class="nav nav-pills nav-stacked nav-hierarchy" t-att-style="'display:block;' if categ.id in parent_category_ids else 'display:none;'">
+               <t t-foreach="categ.child_id" t-as="categ">
+                  <t t-call="website_sale.option_collapse_categories_recursive"/>
+              </t>
+          </ul>
+      </li>
+    </template>
+
     </data>
 </openerp>
