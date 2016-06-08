@@ -8,6 +8,14 @@ var core = require('web.core');
 var utils = require('web.utils');
 var round_pr = utils.round_precision;
 
+/*We are replacing the domain when we find the model.*/
+$.each(module.PosModel.prototype.models,function(i,model) {
+    if (model.model=='pos.category'){
+        model.context = function(self){ return { pos_ui: true }; }
+    }
+    //val = val.replace(new RegExp('\\b' + v + '\\b', 'g'),r[i]);
+});
+
 models.load_models({
         model:  'product.product',
         fields: ['display_name', 'list_price','price','pos_categ_id', 'taxes_id', 'barcode', 'default_code',
