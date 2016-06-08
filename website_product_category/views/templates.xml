@@ -52,7 +52,16 @@
 
 
     <template id="option_collapse_categories_recursive" name="Collapse Category Recursive" inherit_id="website_sale.option_collapse_categories_recursive">
-      <xpath expr="//ul" position="replace"></xpath>
+      <xpath expr="//ul" position="replace">
+          <ul t-if="categ.child_id" class="nav nav-pills nav-stacked nav-hierarchy" t-att-style="'display:block;' if categ.id in parent_category_ids else 'display:none;'">
+           <t t-foreach="categ.child_id" t-as="categ">
+               <t t-if="categ.on_screen">
+                   <t t-call="website_sale.option_collapse_categories_recursive"/>
+               </t>
+
+          </t>
+        </ul>
+      </xpath>
     </template>
 
     </data>
