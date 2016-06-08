@@ -15,8 +15,9 @@
 
     """,
     'images': [],
-    'depends': ['product', 'point_of_sale', 'mrp', 'website_sale','website_form'],
+    'depends': ['product', 'point_of_sale', 'mrp', 'website_sale','website_form','web'],
     'data': [
+        'views/templates.xml',
         'sequence.xml',
         'wizard/new_product.xml',
         'product.xml',
