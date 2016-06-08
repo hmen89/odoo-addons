@@ -57,7 +57,7 @@ class website_product_category(website_sale):
             url = "/shop/category/%s" % slug(category)
 
             category_obj = pool['product.public.category']
-            category_ids = category_obj.search(cr, uid, [('parent_id', '=', category.id)], context=context)
+            category_ids = category_obj.search(cr, uid, [('parent_id', '=', category.id),('on_screen','=',True)], context=context)
             categs = category_obj.browse(cr, uid, category_ids, context=context)
 
             for c in categs:
@@ -65,7 +65,7 @@ class website_product_category(website_sale):
 
         else:
             category_obj = pool['product.public.category']
-            category_ids = category_obj.search(cr, uid, [('parent_id', '=', None)], context=context)
+            category_ids = category_obj.search(cr, uid, [('parent_id', '=', None),('on_screen','=',True)], context=context)
             categs = category_obj.browse(cr, uid, category_ids, context=context)
 
             for c in categs:
