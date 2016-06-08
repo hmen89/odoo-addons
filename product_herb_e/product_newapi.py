@@ -46,8 +46,10 @@ class PosCategory(models.Model):
             context = {}
         if context.get('pos_ui'):
             categs_not_shown = []
-            product_obj = self.pool.get('product_product')
+            product_obj = self.pool.get('product.product')
+
             product_categ_ids = super(PosCategory, self).search(cr, uid, [('product_category','=',True)])
+
             products_not_for_sale = product_obj.search(cr, uid, [('sale_ok','=',False),('inventory_type','=','weight')])
             product_names = []
             for pr in product_obj.browse(cr, uid, products_not_for_sale):
