@@ -46,12 +46,12 @@
 
 
     <template id="products" name="Products" inherit_id="website_sale.products">
-        <xpath expr="//div[@class='text-center text-muted']" position="replace">
+        <xpath expr="//ul" position="replace">
       </xpath>
     </template>
 
 
-    <template id="option_collapse_categories_recursive" name="Collapse Category Recursive">
+    <template id="option_collapse_categories_recursive" name="Collapse Category Recursive" inherit_id="website_sale.option_collapse_categories_recursive">
       <li t-att-class="'active' if categ.id == int(category or 0) else ''" ref="recursive">
           <i t-if="categ.child_id" t-attf-class="text-primary fa #{'fa-chevron-down' if categ.id in parent_category_ids else 'fa-chevron-right'}"/>
           <a t-att-href="keep('/shop/category/' + slug(categ), category=0)" t-field="categ.name"></a>
