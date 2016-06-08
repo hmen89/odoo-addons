@@ -111,17 +111,17 @@ class product_new(osv.osv_memory):
 
             prod_categ_ids = categ_pool.search(cr, uid, [('name','=',sobj.name),('parent_id','=',sobj.categ_id.id)])
             if not prod_categ_ids:
-                prod_categ_id = categ_pool.create(cr, uid, {'image':sobj.image, 'name': sobj.name, 'parent_id': sobj.categ_id.id, 'product_category':True})
+                prod_categ_id = categ_pool.create(cr, uid, {'image':sobj.image, 'name': sobj.name, 'parent_id': sobj.categ_id.id, 'product_category':True, 'on_screen': sobj.sale_ok})
             else:
                 prod_categ_id = prod_categ_ids[0]
-                categ_pool.write(cr, uid, [prod_categ_id], {'image': sobj.image})
+                categ_pool.write(cr, uid, [prod_categ_id], {'image': sobj.image, 'on_screen': sobj.sale_ok})
 
             public_categ_ids = public_categ_pool.search(cr, uid, [('name','=',sobj.name),('parent_id','=',sobj.public_categ_id.id)])
             if not public_categ_ids:
-                public_categ_id = public_categ_pool.create(cr, uid, {'image': sobj.image, 'name': sobj.name, 'parent_id': sobj.public_categ_id.id, 'product_category':True})
+                public_categ_id = public_categ_pool.create(cr, uid, {'image': sobj.image, 'name': sobj.name, 'parent_id': sobj.public_categ_id.id, 'product_category':True, 'on_screen': sobj.sale_ok})
             else:
                 public_categ_id = public_categ_ids[0]
-                public_categ_pool.write(cr, uid, [public_categ_id], {'image': sobj.image})
+                public_categ_pool.write(cr, uid, [public_categ_id], {'image': sobj.image, 'on_screen': sobj.sale_ok})
 
             product_vals = {
                                 'name'             : sobj.name + ' Gram',

@@ -51,13 +51,23 @@ product_product()
 class pos_category(osv.osv):
     _inherit = 'pos.category'
     _columns = {
-                    'product_category': fields.boolean('Product Category')
+                    'product_category': fields.boolean('Product Category'),
+        'on_screen': fields.boolean('On Screen')
+    }
+
+    _defaults = {
+        'on_screen': True
     }
 pos_category()
 
 class product_public_category(osv.osv):
     _inherit = 'product.public.category'
     _columns = {
-                    'product_category': fields.boolean('Product Category')
+                    'product_category': fields.boolean('Product Category'),
+        'on_screen': fields.boolean('On Screen')
+    }
+
+    _defaults = {
+        'on_screen': True
     }
 product_public_category()
