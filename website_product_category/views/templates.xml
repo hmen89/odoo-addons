@@ -59,7 +59,7 @@
                     <t t-set="childs" t-value="childs+1"/>
                </t>
           </t>
-          <i t-if="childs > 0" t-attf-childs="childs" t-attf-class="text-primary fa #{'fa-chevron-down' if categ.id in parent_category_ids else 'fa-chevron-right'}"/>
+          <i t-if="childs > 0" t-attf-childs="#{childs}" t-attf-class="text-primary fa #{'fa-chevron-down' if categ.id in parent_category_ids else 'fa-chevron-right'}"/>
       </xpath>
         <xpath expr="//ul" position="replace">
           <ul t-if="categ.child_id" class="nav nav-pills nav-stacked nav-hierarchy" t-att-style="'display:block;' if categ.id in parent_category_ids else 'display:none;'">
