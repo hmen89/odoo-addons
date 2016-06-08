@@ -54,9 +54,13 @@ class PosCategory(models.Model):
                 prod_name = pr.name.replace(' Gram', '')
                 product_names.append(prod_name)
 
+            print product_names
+
             for pc in self.browse(cr, uid, product_categ_ids):
                 if pc.name in product_names:
                     categs_not_shown.append(pc.id)
             args.append((('id', 'not in', categs_not_shown)))
+            print categs_not_shown
+            print args
         return super(PosCategory, self).search(cr, uid, args, offset=offset, limit=limit, order=order,
                                                    context=context, count=count)
