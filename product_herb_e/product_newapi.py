@@ -38,7 +38,7 @@ class ProductProduct(models.Model):
     _order = 'id desc'
 
     @api.one
-    @api.depends('uom_id', 'uom_id.category_id')
+    @api.depends('uom_id')
     def _compute_inventory_type(self):
         if self.uom_id.name.lower() in ['g', 'gram'] and self.uom_id.category_id.name == 'Weight':
             self.inventory_type = 'weight'
