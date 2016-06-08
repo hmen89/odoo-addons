@@ -16,7 +16,17 @@ $.each(module.PosModel.prototype.models,function(i,model) {
     //val = val.replace(new RegExp('\\b' + v + '\\b', 'g'),r[i]);
 });
 
-models.load_models({
+models.load_models(
+    {
+        model:  'pos.category',
+        fields: ['id','name','parent_id','child_id','image'],
+        domain: null,
+        context: function(self){ return { pos_ui: true }; },
+        loaded: function(self, categories){
+            self.db.add_categories(categories);
+        },
+    },
+    {
         model:  'product.product',
         fields: ['display_name', 'list_price','price','pos_categ_id', 'taxes_id', 'barcode', 'default_code',
                  'to_weight', 'uom_id', 'description_sale', 'description', 'sort_code',
