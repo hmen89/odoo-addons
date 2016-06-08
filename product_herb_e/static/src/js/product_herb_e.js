@@ -11,7 +11,7 @@ var round_pr = utils.round_precision;
 models.load_models({
     model:  'pos.category',
         fields: ['id','name','parent_id','child_id','image','on_screen'],
-        domain: [['on_screebn','=',true]],
+        domain: [['on_screen','=',true]],
         loaded: function(self, categories){
             console.log('CATEGORIES', categories);
             self.db.add_categories(categories);
