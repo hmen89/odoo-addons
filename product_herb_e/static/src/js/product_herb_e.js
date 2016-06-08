@@ -8,16 +8,15 @@ var core = require('web.core');
 var utils = require('web.utils');
 var round_pr = utils.round_precision;
 
-models.load_models({
-    model:  'pos.category',
-        fields: ['id','name','parent_id','child_id','image','on_screen'],
-        domain: [['on_screen','=',true]],
-        loaded: function(self, categories){
-            console.log('CATEGORIES', categories);
-            self.db.add_categories(categories);
-        },
-});
+//models.load_fields("pos.category", "on_screen");
 
+/*We are replacing the domain when we find the model.*/
+$.each(models.PosModel.prototype.models,function(i,model) {
+    console.log(model);
+    if (model.model=='pos.category'){
+        model.domain = [['on_screen','=',true]];
+    }
+});
 
 models.load_models({
         model:  'product.product',
