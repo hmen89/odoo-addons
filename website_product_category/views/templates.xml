@@ -55,7 +55,7 @@
       <xpath expr="//i" position="replace">
           <t t-set="childs" t-value="0"/>
           <t t-foreach="categ.child_id" t-as="child">
-               <t t-if="categ.on_screen">
+               <t t-if="child.on_screen">
                     <t t-set="childs" t-value="childs+1"/>
                </t>
           </t>
