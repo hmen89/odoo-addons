@@ -42,7 +42,6 @@
 									<div class="form-group form-field">
 										<label class="col-md-3 col-sm-4 control-label" for="contact_name">Address</label>
 										<div class="col-md-7 col-sm-8">
-											<input type="hidden" class="form-control o_website_form_input" name="partner_id" t-att-value="partner_id" required=""/>
 											<input type="text" class="form-control o_website_form_input" name="street" t-att-value="request.params.get('street', '')" placeholder="Street"/>
 											<input type="text" class="form-control o_website_form_input" name="street2" t-att-value="request.params.get('street2', '')" placeholder="Street2"/>
 
@@ -85,10 +84,10 @@
 											<input type="text" class="form-control o_website_form_input" name="mobile" t-att-value="request.params.get('mobile', '')"/>
 										</div>
 									</div>
-									<div class="form-group form-field">
-										<label class="col-md-3 col-sm-4 control-label" for="email_from">Email</label>
+									<div class="form-group form-field o_website_form_required_custom">
+										<label class="col-md-3 col-sm-4 control-label" for="login">Email</label>
 										<div class="col-md-7 col-sm-8">
-											<input type="text" class="form-control o_website_form_input" name="email_from" t-att-value="email_from"/>
+											<input type="text" class="form-control o_website_form_input" name="login" t-att-value="login" id="login" required="required"/>
 										</div>
 									</div>
 								</div>
@@ -143,10 +142,34 @@
 										</div>
 									</div>
 
+									<div class="form-group form-field o_website_form_required_custom">
+										<label for="password"  class="col-md-3 col-sm-4 control-label">Password</label>
+										<div class="col-md-7 col-sm-8">
+										<input type="password" name="password" id="password" class="form-control o_website_form_input"
+											required="required"/>
+											</div>
+									</div>
+
+									<div class="form-group form-field o_website_form_required_custom">
+										<label for="confirm_password"  class="col-md-3 col-sm-4 control-label">Confirm Password</label>
+										<div class="col-md-7 col-sm-8">
+										<input type="password" name="confirm_password" id="confirm_password" class="form-control o_website_form_input"  required="required"/>
+											</div>
+									</div>
+
 								</div>
 							</div>
 
-							<div class="row">
+
+							<p class="alert alert-danger" t-if="error">
+								<t t-esc="error"/>
+							</p>
+							<input type="hidden" name="redirect" t-att-value="redirect"/>
+							<input type="hidden" name="token" t-att-value="token"/>
+							<div class="clearfix oe_login_buttons">
+								<button type="submit" class="btn btn-primary pull-left">Send Request</button>
+							</div>
+							<!--<div class="row">
 							<div class="col-md-12">
 							<div class="form-group">
 							<div class="col-md-offset-3 col-sm-offset-4 col-sm-8 col-md-7">
@@ -155,7 +178,7 @@
 							</div>
 							</div>
 							</div>
-							</div>
+							</div>-->
 						</form>
 					</div>
 					<div class="oe_structure"/>
