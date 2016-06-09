@@ -73,5 +73,18 @@
       </xpath>
     </template>
 
+
+    <template id="product_quantity_logged" inherit_id="website_sale.product_quantity">
+        <xpath expr="//div[@class='css_quantity input-group oe_website_spinner']" position="attributes">
+            <attribute name="groups">base.group_user,base.group_portal</attribute>
+        </xpath>
+    </template>
+
+    <template id="product_logged" inherit_id="website_sale.product">
+        <xpath expr="//a[@id='add_to_cart']" position="attributes">
+            <attribute name="groups">base.group_user,base.group_portal</attribute>
+        </xpath>
+    </template>
+
     </data>
 </openerp>
