@@ -15,14 +15,14 @@
 
     """,
     'images': [],
-    'depends': ['product', 'point_of_sale', 'mrp', 'website_sale','website_form','web'],
+    'depends': ['product', 'point_of_sale', 'mrp', 'website_sale','website_form','web', 'mail_extension'],
     'data': [
         'views/templates.xml',
         'sequence.xml',
         'wizard/new_product.xml',
         'product.xml',
         'partner.xml',
-
+        'verify_view.xml',
         'views/product_herb_e.xml',
         'views/website_contact.xml',
 

@@ -1,7 +1,7 @@
 from openerp.osv import osv, fields
 import openerp
 from openerp import api
-from openerp import SUPERUSER_ID, models
+from openerp import SUPERUSER_ID, models, _
 
 
 class res_partner(osv.osv):
@@ -16,11 +16,11 @@ class res_partner(osv.osv):
         'reco_issuer': fields.char('Issuer Name', size=64),
         'reco_license': fields.char('Issuer License', size=32),
         'reco_verification_url': fields.char('Verification URL', size=128),
-        'verified': fields.boolean('Verified')
+        'reco_verified': fields.selection([('v','Yes'),('nv','No')], string='Verified')
     }
 
     _defaults = {
-        'verified': True,
+        'reco_verified': 'v',
     }
 
 
@@ -31,7 +31,7 @@ class res_users(osv.osv):
 
     def check_credentials(self, cr, uid, password):
         super(res_users, self).check_credentials(cr, uid, password)
-        res2 = self.search(cr, SUPERUSER_ID, [('id', '=', uid), ('verified', '=', True)])
+        res2 = self.search(cr, SUPERUSER_ID, [('id', '=', uid), ('reco_verified', '=', 'v')])
         if not res2:
             raise openerp.exceptions.AccessDenied()
 
@@ -45,14 +45,19 @@ class res_users(osv.osv):
             :param token: signup token (optional)
             :return: (dbname, login, password) for the signed up user
         """
+
+        partner_created = False
+        res_partner = self.pool.get('res.partner')
+
         if token:
             # signup with a token: find the corresponding partner id
-            res_partner = self.pool.get('res.partner')
             partner = res_partner._signup_retrieve_partner(
                 cr, uid, token, check_validity=True, raise_exception=True, context=None)
             # invalidate signup token
-            partner.write({'signup_token': False, 'signup_type': False, 'signup_expiration': False, 'verified': False})
+            partner.write({'signup_token': False, 'signup_type': False, 'signup_expiration': False, 'reco_verified': 'nv'})
             partner.write(partner_values)
+
+            partner_created = partner.id
 
             partner_user = partner.user_ids and partner.user_ids[0] or False
 
@@ -84,16 +89,48 @@ class res_users(osv.osv):
             # no token, sign up an external user
             values['email'] = values.get('email') or values.get('login')
             self._signup_create_user(cr, uid, values, context=context)
-            res_partner = self.pool.get('res.partner')
             res_partner_ids = res_partner.search(cr, uid, [('email','=',values.get('email') or values.get('login'))])
             if res_partner_ids:
                 partner_id = res_partner.browse(cr, uid, res_partner_ids[0])
                 partner_id.write(
-                    {'verified': False})
+                    {'verified': 'nv'})
                 partner_id.write(partner_values)
+                partner_created = res_partner_ids[0]
 
 
+        verifiers_pool = self.pool.get('herb.verifiers')
+        verifiers_ids = verifiers_pool.search(cr, uid, [])
+
+        if partner_created:
+            partner_new_obj = res_partner.browse(cr, uid, partner_created)
+            partners_verifiers = []
+            for v in verifiers_pool.browse(cr, uid, verifiers_ids):
+                partners_verifiers.append(v.user_id.partner_id.id)
+
+            message = "Please verify user with name %s" % partner_new_obj.name or ''
+
+            self.send_notification_to_verifiers(cr, uid, [partner_created], 'res.partner', partners_verifiers, message=message, context={})
 
         return (cr.dbname, values.get('login'), values.get('password'))
 
-res_users
+    def send_notification_to_verifiers(self, cr, uid, ids, model, partner_ids, message="", context=None):
+        mail_thread_pool = self.pool.get('mail.thread')
+        for res_id in ids:
+            post_values = {
+                'subject': _('Request for Verification'),
+                'body': message,
+                'partner_ids': partner_ids,
+                'notified_partner_ids': partner_ids,
+                'attachments': [],
+            }
+            subtype = 'mail.mt_comment'
+
+            ref = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'mail', 'mt_comment')
+            subtype_id = ref and ref[1] or False
+
+            message_id = mail_thread_pool.message_custom_post(cr, uid, [0], type='notification', subtype=subtype,
+                                                              model=model, res_id=res_id, context=context,
+                                                              **post_values)
+
+
+res_users()

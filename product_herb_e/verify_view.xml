@@ -1,0 +1,25 @@
+<openerp>
+	<data>
+
+        <record id="herb_verifiers_tree" model="ir.ui.view">
+			<field name="model">herb.verifiers</field>
+            <field name="arch" type="xml">
+                <tree string="Herb Verifiers" editable="bottom">
+                	<field name="user_id"/>
+                </tree>
+            </field>
+        </record>
+
+		<record id="herb_verifiers_action" model="ir.actions.act_window">
+            <field name="name">Herb Verfiers</field>
+            <field name="res_model">herb.verifiers</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="herb_verifiers_tree"/>
+        </record>
+        
+        <menuitem id="menu_herb_verifiers_action" action="herb_verifiers_action" parent="base.menu_security"/>
+
+		
+	</data>
+</openerp>
