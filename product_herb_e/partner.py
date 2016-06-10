@@ -16,11 +16,11 @@ class res_partner(osv.osv):
         'reco_issuer': fields.char('Issuer Name', size=64),
         'reco_license': fields.char('Issuer License', size=32),
         'reco_verification_url': fields.char('Verification URL', size=128),
-        'reco_verified': fields.selection([('v','Yes'),('nv','No')], string='Verified')
+        'verified': fields.selection([('v','Yes'),('nv','No')], string='Verified')
     }
 
     _defaults = {
-        'reco_verified': 'v',
+        'verified': 'v',
     }
 
 
@@ -31,7 +31,7 @@ class res_users(osv.osv):
 
     def check_credentials(self, cr, uid, password):
         super(res_users, self).check_credentials(cr, uid, password)
-        res2 = self.search(cr, SUPERUSER_ID, [('id', '=', uid), ('reco_verified', '=', 'v')])
+        res2 = self.search(cr, SUPERUSER_ID, [('id', '=', uid), ('verified', '=', 'v')])
         if not res2:
             raise openerp.exceptions.AccessDenied()
 
@@ -54,7 +54,7 @@ class res_users(osv.osv):
             partner = res_partner._signup_retrieve_partner(
                 cr, uid, token, check_validity=True, raise_exception=True, context=None)
             # invalidate signup token
-            partner.write({'signup_token': False, 'signup_type': False, 'signup_expiration': False, 'reco_verified': 'nv'})
+            partner.write({'signup_token': False, 'signup_type': False, 'signup_expiration': False, 'verified': 'nv'})
             partner.write(partner_values)
 
             partner_created = partner.id

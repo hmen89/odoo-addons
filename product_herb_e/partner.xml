@@ -17,7 +17,7 @@
           <field name="reco_issuer"/>
           <field name="reco_license"/>
           <field name="reco_verification_url" widget="url"/>
-          <field name="reco_verified"/>
+          <field name="verified"/>
 
         </field>
       </field>
