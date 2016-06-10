@@ -25,6 +25,7 @@
         'verify_view.xml',
         'views/product_herb_e.xml',
         'views/website_contact.xml',
+        'security/ir.model.access.csv',
 
     ],
     'qweb': ['static/src/xml/pos.xml'],
