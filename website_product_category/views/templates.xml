@@ -86,5 +86,13 @@
         </xpath>
     </template>
 
+    <template id="products_description" inherit_id="website_sale.products_description">
+  <xpath expr="//div[@class='text-info oe_subdescription']" position="replace">
+      <div class="text-info oe_subdescription" contenteditable="false">
+        <div itemprop="description" t-field="product.description"></div>
+      </div>
+  </xpath>
+</template>
+
     </data>
 </openerp>
