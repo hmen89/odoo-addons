@@ -54,7 +54,7 @@ class res_users(osv.osv):
             partner = res_partner._signup_retrieve_partner(
                 cr, uid, token, check_validity=True, raise_exception=True, context=None)
             # invalidate signup token
-            partner.write({'signup_token': False, 'signup_type': False, 'signup_expiration': False, 'hb_verified': 'nv'})
+            partner.write({'signup_token': False, 'signup_type': False, 'signup_expiration': False, 'hb_verified': ''})
             partner.write(partner_values)
 
             partner_created = partner.id
@@ -93,7 +93,7 @@ class res_users(osv.osv):
             if res_partner_ids:
                 partner_id = res_partner.browse(cr, uid, res_partner_ids[0])
                 partner_id.write(
-                    {'hb_verified': 'nv'})
+                    {'hb_verified': ''})
                 partner_id.write(partner_values)
                 partner_created = res_partner_ids[0]
 
