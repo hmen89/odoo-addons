@@ -13,7 +13,7 @@
   <t t-extend="Product">
     <t t-jquery="span[class=price-tag]" t-operation="replace">
       <span class="price-tag">
-        <t t-esc="widget.format_currency(product.price,'Product Price')+'/g'"/>
+        <t t-esc="widget.format_currency(product.price,'Product Price')"/>
       </span>
     </t>
   </t>
