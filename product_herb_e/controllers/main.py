@@ -30,7 +30,7 @@ class HerbSignupHome(openerp.addons.web.controllers.main.Home):
             return http.redirect_with_hash(request.params.get('redirect'))
         return response
 
-    @http.route(['/website/page/getverified','/page/getverified'], type='http', auth='public', website=True)
+    @http.route([‘/web/signup’,’/website/page/getverified','/page/getverified'], type='http', auth='public', website=True)
     def web_auth_signup(self, *args, **kw):
         qcontext = self.get_auth_signup_qcontext()
 
