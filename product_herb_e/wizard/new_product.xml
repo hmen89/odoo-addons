@@ -53,8 +53,11 @@
                   <label for="sale_ok"/><br/>
                   <field name="publish"/>
                   <label for="publish"/><br/>
+                  <field name="min_qty_18_oz"/>
+                  <label for="min_qty_18_oz"/><br/>
                   <field name="to_weight" attrs="{'invisible':[('inventory_type','=','unit')]}"/>
                   <label for="to_weight" attrs="{'invisible':[('inventory_type','=','unit')]}"/>
+
                 </div>
 
                 <field name="description" colspan="2" nolabel="1" placeholder="Description"/>

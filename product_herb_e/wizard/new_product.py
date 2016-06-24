@@ -30,6 +30,7 @@ class product_new(osv.osv_memory):
 
                     'mode': fields.char('Mode'),
                     'product_select_id': fields.many2one('product.product', 'Product'),
+        'min_qty_18_oz': fields.boolean('Min. Qty 1/8 Oz.'),
     }
     _defaults = {
                     'sale_ok'  : True,
@@ -137,6 +138,7 @@ class product_new(osv.osv_memory):
                                 'sale_ok'           : sobj.sale_ok,
                                 'website_published' : sobj.publish,
                                 'to_weight'         : sobj.to_weight,
+                                'min_qty_18_oz'     : sobj.min_qty_18_oz,
                                 
                                 'image'             : sobj.image,
                                 'uom_id'            : uom_ids[0],
@@ -241,6 +243,11 @@ class product_new(osv.osv_memory):
                     if not pt_exist:
                         public_categ_pool.unlink(cr, uid, [categ_id])
 
+
+            if pt_id:
+                if sobj.min_qty_18_oz:
+                    pt_pool.write(cr, uid, [pt_id], {'sale_ok': False})
+
         if prod_created:
             return {
                 'type'      : 'ir.actions.act_window',
@@ -286,6 +293,7 @@ class product_new(osv.osv_memory):
             ret['value']['publish']           = prod.website_published
             ret['value']['to_weight']         = prod.to_weight
             ret['value']['description']       = prod.description
+            ret['value']['min_qty_18_oz']     = prod.min_qty_18_oz
 
             if inventory_type == 'weight':
                 prod_name = prod.name.replace(' Gram','')
@@ -298,6 +306,8 @@ class product_new(osv.osv_memory):
 
                 ret['value']['line_ids'] = [[6,0,[]]]
                 for drv in prod.derivative_ids:
+                    if drv.sale_ok:
+                        ret['value']['sale_ok'] = drv.sale_ok
                     if drv.bom_ids:
                         for b_line in drv.bom_ids[0].bom_line_ids:
                             weight = b_line.product_qty

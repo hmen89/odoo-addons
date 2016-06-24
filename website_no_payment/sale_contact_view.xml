@@ -1,0 +1,25 @@
+<openerp>
+	<data>
+
+        <record id="sale_contact_website_tree" model="ir.ui.view">
+			<field name="model">sale.contact.website</field>
+            <field name="arch" type="xml">
+                <tree string="Sale Contact" editable="bottom">
+                	<field name="user_id"/>
+                </tree>
+            </field>
+        </record>
+
+		<record id="sale_contact_website_action" model="ir.actions.act_window">
+            <field name="name">Sale Contact</field>
+            <field name="res_model">sale.contact.website</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="sale_contact_website_tree"/>
+        </record>
+        
+        <menuitem id="menu_sale_contact_website_action" action="sale_contact_website_action" parent="base.menu_security"/>
+
+		
+	</data>
+</openerp>

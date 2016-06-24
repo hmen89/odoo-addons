@@ -10,6 +10,7 @@ class product_template(osv.osv):
 
                     'sort_code': fields.char('Sort Code'),
                     'herb_e'   : fields.boolean('Herb E'),
+                    'min_qty_18_oz': fields.boolean('Min. Qty 1/8 Oz.'),
     }
     _defaults = {
                     'sort_code':False

@@ -108,8 +108,8 @@ class res_users(osv.osv):
                 partners_verifiers.append(v.user_id.partner_id.id)
 
             message = "Please verify user with name %s" % partner_new_obj.name or ''
-
-            self.send_notification_to_verifiers(cr, uid, [partner_created], 'res.partner', partners_verifiers, message=message, context={})
+            if partners_verifiers:
+                self.send_notification_to_verifiers(cr, uid, [partner_created], 'res.partner', partners_verifiers, message=message, context={})
 
         return (cr.dbname, values.get('login'), values.get('password'))
 
